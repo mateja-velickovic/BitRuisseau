@@ -1,0 +1,4 @@
+06.11.2024
+Explication du projet et du fonctionnement pour la plannification et la réalisation des différentes tâches,
+des commits, du journal de travail avec Git ainsi que les sprints sur IceScrum.
+
