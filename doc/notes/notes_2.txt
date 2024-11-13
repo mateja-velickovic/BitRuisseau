@@ -1,0 +1,17 @@
+13.11.2024
+
+Explication de la forme du rapport (changer la page de garde + consignes teams).
+Expliquer le rendu du journal de travail et autres dans le rapport.
+
+Chapitre 2 :
+> Explication du protocole (le faire aujourd'hui) et faire l'analyse fonctionelle .
+
+Stratégies de tests :
+> Ne pas mettre de fonctiomnalités.
+> Comment est-ce que je vais tester ? 
+> Description = IceScrum.
+> Pour chaque story, noter le résultat.
+
+Dette technique (intentionnelle/consciente) : 
+> Quand on fait quelque chose qui n'est pas correct d'un point de vue technique (ex: plutôt LINQ que for).
+  > Solution : Quick Fix
