@@ -15,3 +15,5 @@ Stratégies de tests :
 Dette technique (intentionnelle/consciente) : 
 > Quand on fait quelque chose qui n'est pas correct d'un point de vue technique (ex: plutôt LINQ que for).
   > Solution : Quick Fix
+
+Définition du protocole : Voir rapport 7.3b
