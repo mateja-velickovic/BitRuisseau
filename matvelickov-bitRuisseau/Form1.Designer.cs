@@ -96,8 +96,11 @@
             // showMedia
             // 
             this.showMedia.Location = new System.Drawing.Point(386, 12);
+            this.showMedia.MaximumSize = new System.Drawing.Size(402, 264);
+            this.showMedia.MinimumSize = new System.Drawing.Size(402, 264);
             this.showMedia.Name = "showMedia";
             this.showMedia.Size = new System.Drawing.Size(402, 264);
+            this.showMedia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.showMedia.TabIndex = 6;
             this.showMedia.TabStop = false;
             // 
@@ -116,6 +119,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.showMedia)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

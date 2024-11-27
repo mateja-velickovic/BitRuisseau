@@ -86,13 +86,17 @@ namespace matvelickov_bitRuisseau
         /// <param name="e"></param>
         private void show_media_Click(object sender, EventArgs e)
         {
+            // TODO Afficher l'image selon l'image sélectionée et pas le file_dialog
             string path = $@"{file_dialog.FileName}";
             string ext = Path.GetExtension(path);
 
-            if (ext == "mp3")
-                showMedia.Image = Image.FromFile(file_dialog.FileName);
+            if (ext == ".mp3")
+                showMedia.Image = null;
             else
+            {
                 showMedia.Image = Image.FromFile(file_dialog.FileName);
+                showMedia.Size = new Size(200, 200);
+            }
         }
 
         /// <summary>
