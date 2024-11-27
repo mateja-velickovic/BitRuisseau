@@ -12,7 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,18 +38,16 @@ namespace matvelickov_bitRuisseau
         private void upload_media_Click(object sender, EventArgs e)
         {
             // Applied filters
-            file_dialog.Filter = "Images et vidéos (*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF;*.MP4;*.AVI;*.MKV;*.MOV;*.WMV)|*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF;*.MP4;*.AVI;*.MKV;*.MOV;*.WMV|" +
+            file_dialog.Filter = "Images et vidéos (*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV)|*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV|" +
             "All files (*.*)|*.*";
 
             DialogResult dr = file_dialog.ShowDialog();
 
-            // We check if the user uploaded the file
+            // TODO Check the file's extension
             if (dr == DialogResult.OK)
             {
                 UploadMedia();
             }
-
- 
         }
 
         /// <summary>
@@ -55,7 +55,8 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         public void UploadMedia()
         {
-            mediaList.Items.Add(file_dialog.SafeFileName);
+            long file_size_ko = new System.IO.FileInfo(file_dialog.FileName).Length / 1000;
+            mediaList.Items.Add($"{file_dialog.SafeFileName} - {file_size_ko}Ko");
         }
 
         /// <summary>
@@ -74,18 +75,37 @@ namespace matvelickov_bitRuisseau
         /// <param name="e"></param>
         private void delete_media_Click(object sender, EventArgs e)
         {
-            if(mediaList.SelectedItem != null)
+            if (mediaList.SelectedItem != null)
                 mediaList.Items.Remove(mediaList.SelectedItem);
         }
 
         /// <summary>
-        /// Enable the delete button when a media's selected
+        /// Show the selected media
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void show_media_Click(object sender, EventArgs e)
+        {
+            string path = $@"{file_dialog.FileName}";
+            string ext = Path.GetExtension(path);
+
+            if (ext == "mp3")
+                showMedia.Image = Image.FromFile(file_dialog.FileName);
+            else
+                showMedia.Image = Image.FromFile(file_dialog.FileName);
+        }
+
+        /// <summary>
+        /// Enable the delete and show button when a media's selected
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void mediaList_SelectedIndexChanged(object sender, EventArgs e)
         {
             delete_media.Enabled = mediaList.SelectedItem != null;
+            show_media.Enabled = mediaList.SelectedItem != null;
         }
+
+
     }
 }
