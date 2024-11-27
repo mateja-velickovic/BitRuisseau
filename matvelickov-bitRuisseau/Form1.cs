@@ -1,4 +1,13 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////
+///                                                      ///
+///     ETML, Vennes                                     ///
+///     Author : Velickovic Mateja (matvelickov)         ///
+///     Project : P_DEV bit-ruisseau                     ///
+///     Date : 06.11.2024                                ///
+///                                                      ///
+////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace matvelickov_bitRuisseau
 {
@@ -36,6 +46,8 @@ namespace matvelickov_bitRuisseau
             {
                 UploadMedia();
             }
+
+ 
         }
 
         /// <summary>
@@ -43,31 +55,7 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         public void UploadMedia()
         {
-            Image.GetThumbnailImageAbort cb = new Image.GetThumbnailImageAbort(CallBack);
-            Bitmap bm = new Bitmap(file_dialog.FileName);
-
-            // Setting the final picture
-            Image final_picture = bm.GetThumbnailImage(300, 300, cb, IntPtr.Zero);
-            imageList1.Images.Add(final_picture);
-            media_list.Items.Add(file_dialog.SafeFileName);
-
-            Graphics theGraphics = Graphics.FromHwnd(this.Handle);
-
-            for (int c = 0; c < imageList1.Images.Count; ++c)
-            {
-                try
-                {
-                    imageList1.Draw(theGraphics, new Point(85, 85 * c / 2), c);
-                }
-                catch (DivideByZeroException)
-                {
-                    imageList1.Draw(theGraphics, new Point(85, 85 * c), c);
-                }
-
-                Application.DoEvents();
-
-                System.Threading.Thread.Sleep(300);
-            }
+            mediaList.Items.Add(file_dialog.SafeFileName);
         }
 
         /// <summary>
@@ -79,5 +67,25 @@ namespace matvelickov_bitRuisseau
             return false;
         }
 
+        /// <summary>
+        /// Deleting the selected media
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void delete_media_Click(object sender, EventArgs e)
+        {
+            if(mediaList.SelectedItem != null)
+                mediaList.Items.Remove(mediaList.SelectedItem);
+        }
+
+        /// <summary>
+        /// Enable the delete button when a media's selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mediaList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            delete_media.Enabled = mediaList.SelectedItem != null;
+        }
     }
 }
