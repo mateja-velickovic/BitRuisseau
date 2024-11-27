@@ -1,0 +1,20 @@
+Livrables du projet (release) :
+ > Code source
+ > Rapport
+   - 2.4 Suppression de la stratégie de tests
+   + 3.1 Design spécifiques (astuces, trouvailles, etc..)
+   + Environnement de travail (pas de logos, version des outils)
+ > Journal
+
+Mise à disposition de la grille d'évaluation
+
+
+Code SOLID/DRY (DontRepeatYourself)
+SOLID
+> Single responsibility principle (une classe fait une seule chose)
+> Open/Close principle (pouvoir évoluer le code sans changer ce qui existe déjà)
+> Interface/dépendances (ne pas utiliser de variables globales, variables déclarées en dehors d'une méthode)
+
+Lignes blanches (max 1)
+
+Envoyer un message lors de la livraison de la release
