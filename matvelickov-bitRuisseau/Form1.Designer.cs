@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.upload_media = new System.Windows.Forms.Button();
             this.file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.mediaList = new System.Windows.Forms.ListBox();
             this.delete_media = new System.Windows.Forms.Button();
             this.show_media = new System.Windows.Forms.Button();
             this.showMedia = new System.Windows.Forms.PictureBox();
+            this.wMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.showMedia)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wMediaPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // upload_media
@@ -53,10 +56,12 @@
             // 
             // mediaList
             // 
+            this.mediaList.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mediaList.FormattingEnabled = true;
+            this.mediaList.ItemHeight = 21;
             this.mediaList.Location = new System.Drawing.Point(12, 12);
             this.mediaList.Name = "mediaList";
-            this.mediaList.Size = new System.Drawing.Size(349, 264);
+            this.mediaList.Size = new System.Drawing.Size(349, 256);
             this.mediaList.TabIndex = 3;
             this.mediaList.SelectedIndexChanged += new System.EventHandler(this.mediaList_SelectedIndexChanged);
             // 
@@ -104,11 +109,22 @@
             this.showMedia.TabIndex = 6;
             this.showMedia.TabStop = false;
             // 
+            // wMediaPlayer
+            // 
+            this.wMediaPlayer.Enabled = true;
+            this.wMediaPlayer.Location = new System.Drawing.Point(386, 12);
+            this.wMediaPlayer.Name = "wMediaPlayer";
+            this.wMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wMediaPlayer.OcxState")));
+            this.wMediaPlayer.Size = new System.Drawing.Size(402, 264);
+            this.wMediaPlayer.TabIndex = 7;
+            this.wMediaPlayer.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.wMediaPlayer);
             this.Controls.Add(this.showMedia);
             this.Controls.Add(this.show_media);
             this.Controls.Add(this.delete_media);
@@ -117,6 +133,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.showMedia)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wMediaPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -129,6 +146,7 @@
         private System.Windows.Forms.Button delete_media;
         private System.Windows.Forms.Button show_media;
         private System.Windows.Forms.PictureBox showMedia;
+        private AxWMPLib.AxWindowsMediaPlayer wMediaPlayer;
     }
 }
 

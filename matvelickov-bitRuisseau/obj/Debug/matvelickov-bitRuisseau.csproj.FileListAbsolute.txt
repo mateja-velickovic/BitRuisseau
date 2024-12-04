@@ -8,3 +8,8 @@ C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\matvelic
 C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\matvelickov-bitRuisseau.exe
 C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\matvelickov-bitRuisseau.pdb
 C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\matvelickov_bitRuisseau.Form1.resources
+C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\bin\Debug\Interop.WMPLib.dll
+C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\Interop.WMPLib.dll
+C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\pe04uhp\Desktop\bit-ruisseau\matvelickov-bitRuisseau\obj\Debug\matvelickov-bitRuisseau.csproj.ResolveComReference.cache

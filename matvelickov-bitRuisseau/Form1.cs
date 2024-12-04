@@ -110,8 +110,10 @@ namespace matvelickov_bitRuisseau
             string path = $@"{new System.IO.FileInfo(currentMedia.Filename)}";
             string ext = Path.GetExtension(path);
 
-            if(imageExt.Contains(ext))
-                showMedia.Image = Image.FromFile(path);
+            if (imageExt.Contains(ext))
+                ShowImage(path);
+            if(audioExt.Contains(ext) || videoExt.Contains(ext))
+                ShowVideo(path);
         }
 
         /// <summary>
@@ -120,7 +122,18 @@ namespace matvelickov_bitRuisseau
         /// <param name="path"></param>
         private void ShowImage(string path)
         {
+            wMediaPlayer.Visible = false;
             showMedia.Image = Image.FromFile(path);
+        }
+
+        /// <summary>
+        /// Show the selected video/audio
+        /// </summary>
+        /// <param name="path"></param>
+        private void ShowVideo(string path)
+        {
+            wMediaPlayer.Visible = true;
+            wMediaPlayer.URL = path;
         }
 
         /// <summary>
