@@ -9,22 +9,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace matvelickov_bitRuisseau
 {
     public partial class Form1 : Form
     {
+        List<Media> listMedia = new List<Media>();
+
+        // List of accepted extensions
+        List<string> listExt = new List<string>() { ".mp3", ".mp4", ".mov", ".gif", ".png", ".jpeg", ".jpg", ".wav" };
+
+        List<string> videoExt = new List<string>() { ".mp4", ".mov" };
+        List<string> imageExt = new List<string>() { ".gif", ".png", ".jpeg", ".jpg" };
+        List<string> audioExt = new List<string>() { ".mp3", ".wav" };
+
         public Form1()
         {
             InitializeComponent();
@@ -41,16 +44,8 @@ namespace matvelickov_bitRuisseau
             file_dialog.Filter = "Images et vidéos (*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV)|*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV|" +
             "All files (*.*)|*.*";
 
-            List<string> listExt = new List<string>() { ".mp3", ".mp4", ".mov", ".gif", ".png", ".jpeg", ".jpg", ".wav"};
-
-            List<string> videoExt = new List<string>() { ".mp4", ".mov" };
-            List<string> imageExt = new List<string>() { ".gif", ".png", ".jpeg", ".jpg" };
-            List<string> audioExt = new List<string>() { ".mp3", ".wav" };
-
-
             DialogResult dr = file_dialog.ShowDialog();
 
-            // TODO Check the file's extension
             if (dr == DialogResult.OK && listExt.Contains(new System.IO.FileInfo(file_dialog.FileName).Extension))
             {
                 UploadMedia();
@@ -62,8 +57,13 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         public void UploadMedia()
         {
-            long file_size_ko = new System.IO.FileInfo(file_dialog.FileName).Length / 1000;
-            mediaList.Items.Add($"{file_dialog.SafeFileName} - {file_size_ko}Ko");
+            long file_size = new System.IO.FileInfo(file_dialog.FileName).Length / 1000;
+            string file_name = new System.IO.FileInfo(file_dialog.FileName).FullName;
+
+            Media currentMedia = new Media(file_name, file_size);
+            listMedia.Add(currentMedia);
+
+            mediaList.Items.Add(new System.IO.FileInfo(currentMedia.Filename).Name);
         }
 
         /// <summary>
@@ -83,27 +83,44 @@ namespace matvelickov_bitRuisseau
         private void delete_media_Click(object sender, EventArgs e)
         {
             if (mediaList.SelectedItem != null)
+            {
+                // TODO Check if the file's sizes are identical
+                // TODO Move the original file in the project folder bin/Debug/
+                Media currentMedia = listMedia.Single(cm => cm.Filename.Contains(mediaList.SelectedItem.ToString()));
+
                 mediaList.Items.Remove(mediaList.SelectedItem);
+                listMedia.Remove(currentMedia);
+
+                showMedia.Image = null;
+            }
         }
 
         /// <summary>
-        /// Show the selected media
+        /// Show the selected media according to its extension
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void show_media_Click(object sender, EventArgs e)
         {
-            // TODO Afficher l'image selon l'image sélectionée et pas le file_dialog
-            string path = $@"{file_dialog.FileName}";
+            // TODO Play music
+            // TOOD Play video
+            // TODO Check the file's extension
+            Media currentMedia = listMedia.Single(cm => cm.Filename.Contains(mediaList.SelectedItem.ToString()));
+
+            string path = $@"{new System.IO.FileInfo(currentMedia.Filename)}";
             string ext = Path.GetExtension(path);
 
-            if (ext == ".mp3")
-                showMedia.Image = null;
-            else
-            {
-                showMedia.Image = Image.FromFile(file_dialog.FileName);
-                showMedia.Size = new Size(200, 200);
-            }
+            if(imageExt.Contains(ext))
+                showMedia.Image = Image.FromFile(path);
+        }
+
+        /// <summary>
+        /// Show the selected image
+        /// </summary>
+        /// <param name="path"></param>
+        private void ShowImage(string path)
+        {
+            showMedia.Image = Image.FromFile(path);
         }
 
         /// <summary>
@@ -116,7 +133,5 @@ namespace matvelickov_bitRuisseau
             delete_media.Visible = mediaList.SelectedItem != null;
             show_media.Visible = mediaList.SelectedItem != null;
         }
-
-
     }
 }

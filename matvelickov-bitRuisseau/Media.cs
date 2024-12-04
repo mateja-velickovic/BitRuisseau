@@ -8,12 +8,12 @@ namespace matvelickov_bitRuisseau
 {
     public class Media
     {
-        string Filename;
-        long Size;
+        public string Filename;
+        public long Size;
 
-        public Media(string filename, int size)
+        public Media(string filename, long size)
         {
-            Filename = filename;
+            Filename = filename; 
             Size = size;
         }
 
