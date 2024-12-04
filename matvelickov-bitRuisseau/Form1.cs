@@ -24,9 +24,8 @@ namespace matvelickov_bitRuisseau
         // List of accepted extensions
         List<string> listExt = new List<string>() { ".mp3", ".mp4", ".mov", ".gif", ".png", ".jpeg", ".jpg", ".wav" };
 
-        List<string> videoExt = new List<string>() { ".mp4", ".mov" };
+        List<string> videoAudioExt = new List<string>() { ".mp4", ".mov", ".mp3", ".wav" };
         List<string> imageExt = new List<string>() { ".gif", ".png", ".jpeg", ".jpg" };
-        List<string> audioExt = new List<string>() { ".mp3", ".wav" };
 
         public Form1()
         {
@@ -64,6 +63,10 @@ namespace matvelickov_bitRuisseau
             listMedia.Add(currentMedia);
 
             mediaList.Items.Add(new System.IO.FileInfo(currentMedia.Filename).Name);
+
+            // TODO Select the uploaded file on upload
+            // TODO Display horizontaly the items
+            mediaList.SelectedItem = new System.IO.FileInfo(currentMedia.Filename).Name;
         }
 
         /// <summary>
@@ -92,6 +95,7 @@ namespace matvelickov_bitRuisseau
                 listMedia.Remove(currentMedia);
 
                 showMedia.Image = null;
+                wMediaPlayer.URL = null;
             }
         }
 
@@ -102,9 +106,7 @@ namespace matvelickov_bitRuisseau
         /// <param name="e"></param>
         private void show_media_Click(object sender, EventArgs e)
         {
-            // TODO Play music
-            // TOOD Play video
-            // TODO Check the file's extension
+            // TODO Check the id of the uploaded the media (duplicates files)
             Media currentMedia = listMedia.Single(cm => cm.Filename.Contains(mediaList.SelectedItem.ToString()));
 
             string path = $@"{new System.IO.FileInfo(currentMedia.Filename)}";
@@ -112,7 +114,7 @@ namespace matvelickov_bitRuisseau
 
             if (imageExt.Contains(ext))
                 ShowImage(path);
-            if(audioExt.Contains(ext) || videoExt.Contains(ext))
+            if(videoAudioExt.Contains(ext) || videoAudioExt.Contains(ext))
                 ShowVideo(path);
         }
 
@@ -123,6 +125,8 @@ namespace matvelickov_bitRuisseau
         private void ShowImage(string path)
         {
             wMediaPlayer.Visible = false;
+            showMedia.Visible = true;
+
             showMedia.Image = Image.FromFile(path);
         }
 
@@ -133,6 +137,8 @@ namespace matvelickov_bitRuisseau
         private void ShowVideo(string path)
         {
             wMediaPlayer.Visible = true;
+            showMedia.Visible = false;
+
             wMediaPlayer.URL = path;
         }
 
