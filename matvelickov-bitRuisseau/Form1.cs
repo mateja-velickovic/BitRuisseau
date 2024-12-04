@@ -41,10 +41,17 @@ namespace matvelickov_bitRuisseau
             file_dialog.Filter = "Images et vidéos (*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV)|*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV|" +
             "All files (*.*)|*.*";
 
+            List<string> listExt = new List<string>() { ".mp3", ".mp4", ".mov", ".gif", ".png", ".jpeg", ".jpg", ".wav"};
+
+            List<string> videoExt = new List<string>() { ".mp4", ".mov" };
+            List<string> imageExt = new List<string>() { ".gif", ".png", ".jpeg", ".jpg" };
+            List<string> audioExt = new List<string>() { ".mp3", ".wav" };
+
+
             DialogResult dr = file_dialog.ShowDialog();
 
             // TODO Check the file's extension
-            if (dr == DialogResult.OK)
+            if (dr == DialogResult.OK && listExt.Contains(new System.IO.FileInfo(file_dialog.FileName).Extension))
             {
                 UploadMedia();
             }
@@ -106,8 +113,8 @@ namespace matvelickov_bitRuisseau
         /// <param name="e"></param>
         private void mediaList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            delete_media.Enabled = mediaList.SelectedItem != null;
-            show_media.Enabled = mediaList.SelectedItem != null;
+            delete_media.Visible = mediaList.SelectedItem != null;
+            show_media.Visible = mediaList.SelectedItem != null;
         }
 
 
