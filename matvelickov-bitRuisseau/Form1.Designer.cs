@@ -32,11 +32,12 @@
             this.upload_media = new System.Windows.Forms.Button();
             this.file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.mediaList = new System.Windows.Forms.ListBox();
+            this.error_filename = new System.Windows.Forms.Label();
+            this.fullscreen_media = new System.Windows.Forms.Button();
             this.showMedia = new System.Windows.Forms.PictureBox();
             this.show_media = new System.Windows.Forms.Button();
             this.delete_media = new System.Windows.Forms.Button();
             this.wMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.error_filename = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.showMedia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wMediaPlayer)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,7 @@
             this.upload_media.Location = new System.Drawing.Point(12, 267);
             this.upload_media.Name = "upload_media";
             this.upload_media.Size = new System.Drawing.Size(165, 39);
-            this.upload_media.TabIndex = 0;
+            this.upload_media.TabIndex = 1;
             this.upload_media.Text = "Charger un média";
             this.upload_media.UseVisualStyleBackColor = false;
             this.upload_media.Click += new System.EventHandler(this.upload_media_Click);
@@ -66,19 +67,50 @@
             this.mediaList.Location = new System.Drawing.Point(12, 12);
             this.mediaList.Name = "mediaList";
             this.mediaList.ScrollAlwaysVisible = true;
-            this.mediaList.Size = new System.Drawing.Size(359, 246);
+            this.mediaList.Size = new System.Drawing.Size(405, 246);
             this.mediaList.TabIndex = 3;
             this.mediaList.SelectedIndexChanged += new System.EventHandler(this.mediaList_SelectedIndexChanged);
             // 
+            // error_filename
+            // 
+            this.error_filename.AutoSize = true;
+            this.error_filename.BackColor = System.Drawing.Color.Transparent;
+            this.error_filename.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.error_filename.ForeColor = System.Drawing.Color.Firebrick;
+            this.error_filename.Location = new System.Drawing.Point(15, 261);
+            this.error_filename.Name = "error_filename";
+            this.error_filename.Size = new System.Drawing.Size(293, 19);
+            this.error_filename.TabIndex = 0;
+            this.error_filename.Text = "Un fichier avec le même nom existe déjà.";
+            this.error_filename.Visible = false;
+            // 
+            // fullscreen_media
+            // 
+            this.fullscreen_media.BackColor = System.Drawing.Color.OliveDrab;
+            this.fullscreen_media.BackgroundImage = global::matvelickov_bitRuisseau.Properties.Resources.fs;
+            this.fullscreen_media.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.fullscreen_media.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fullscreen_media.FlatAppearance.BorderSize = 0;
+            this.fullscreen_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fullscreen_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fullscreen_media.ForeColor = System.Drawing.Color.Transparent;
+            this.fullscreen_media.Location = new System.Drawing.Point(318, 267);
+            this.fullscreen_media.Name = "fullscreen_media";
+            this.fullscreen_media.Size = new System.Drawing.Size(29, 39);
+            this.fullscreen_media.TabIndex = 8;
+            this.fullscreen_media.UseVisualStyleBackColor = false;
+            this.fullscreen_media.Visible = false;
+            // 
             // showMedia
             // 
-            this.showMedia.Location = new System.Drawing.Point(547, 12);
+            this.showMedia.Location = new System.Drawing.Point(12, 312);
             this.showMedia.Name = "showMedia";
-            this.showMedia.Size = new System.Drawing.Size(401, 246);
+            this.showMedia.Size = new System.Drawing.Size(405, 246);
             this.showMedia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.showMedia.TabIndex = 6;
             this.showMedia.TabStop = false;
             this.showMedia.Visible = false;
+            this.showMedia.Click += new System.EventHandler(this.showMedia_Click);
             // 
             // show_media
             // 
@@ -90,9 +122,9 @@
             this.show_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.show_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.show_media.ForeColor = System.Drawing.Color.Transparent;
-            this.show_media.Location = new System.Drawing.Point(860, 264);
+            this.show_media.Location = new System.Drawing.Point(353, 267);
             this.show_media.Name = "show_media";
-            this.show_media.Size = new System.Drawing.Size(41, 52);
+            this.show_media.Size = new System.Drawing.Size(29, 39);
             this.show_media.TabIndex = 5;
             this.show_media.UseVisualStyleBackColor = false;
             this.show_media.Visible = false;
@@ -101,16 +133,16 @@
             // delete_media
             // 
             this.delete_media.BackColor = System.Drawing.Color.Maroon;
-            this.delete_media.BackgroundImage = global::matvelickov_bitRuisseau.Properties.Resources.delete;
+            this.delete_media.BackgroundImage = global::matvelickov_bitRuisseau.Properties.Resources.corbeille;
             this.delete_media.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.delete_media.Cursor = System.Windows.Forms.Cursors.Hand;
             this.delete_media.FlatAppearance.BorderSize = 0;
             this.delete_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delete_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delete_media.ForeColor = System.Drawing.Color.Transparent;
-            this.delete_media.Location = new System.Drawing.Point(907, 264);
+            this.delete_media.Location = new System.Drawing.Point(388, 267);
             this.delete_media.Name = "delete_media";
-            this.delete_media.Size = new System.Drawing.Size(41, 52);
+            this.delete_media.Size = new System.Drawing.Size(29, 39);
             this.delete_media.TabIndex = 4;
             this.delete_media.UseVisualStyleBackColor = false;
             this.delete_media.Visible = false;
@@ -119,39 +151,26 @@
             // wMediaPlayer
             // 
             this.wMediaPlayer.Enabled = true;
-            this.wMediaPlayer.Location = new System.Drawing.Point(547, 12);
+            this.wMediaPlayer.Location = new System.Drawing.Point(12, 312);
             this.wMediaPlayer.Name = "wMediaPlayer";
             this.wMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wMediaPlayer.OcxState")));
-            this.wMediaPlayer.Size = new System.Drawing.Size(401, 246);
-            this.wMediaPlayer.TabIndex = 7;
-            this.wMediaPlayer.Visible = false;
-            // 
-            // error_filename
-            // 
-            this.error_filename.AutoSize = true;
-            this.error_filename.BackColor = System.Drawing.Color.Transparent;
-            this.error_filename.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.error_filename.ForeColor = System.Drawing.Color.Firebrick;
-            this.error_filename.Location = new System.Drawing.Point(12, 261);
-            this.error_filename.Name = "error_filename";
-            this.error_filename.Size = new System.Drawing.Size(311, 20);
-            this.error_filename.TabIndex = 8;
-            this.error_filename.Text = "Un fichier avec le même nom existe déjà.";
-            this.error_filename.Visible = false;
+            this.wMediaPlayer.Size = new System.Drawing.Size(405, 246);
+            this.wMediaPlayer.TabIndex = 9;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(960, 361);
-            this.Controls.Add(this.error_filename);
+            this.ClientSize = new System.Drawing.Size(960, 638);
             this.Controls.Add(this.wMediaPlayer);
+            this.Controls.Add(this.fullscreen_media);
             this.Controls.Add(this.showMedia);
             this.Controls.Add(this.show_media);
             this.Controls.Add(this.delete_media);
             this.Controls.Add(this.mediaList);
             this.Controls.Add(this.upload_media);
+            this.Controls.Add(this.error_filename);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.showMedia)).EndInit();
@@ -169,8 +188,9 @@
         private System.Windows.Forms.Button delete_media;
         private System.Windows.Forms.Button show_media;
         private System.Windows.Forms.PictureBox showMedia;
-        private AxWMPLib.AxWindowsMediaPlayer wMediaPlayer;
         private System.Windows.Forms.Label error_filename;
+        private System.Windows.Forms.Button fullscreen_media;
+        private AxWMPLib.AxWindowsMediaPlayer wMediaPlayer;
     }
 }
 

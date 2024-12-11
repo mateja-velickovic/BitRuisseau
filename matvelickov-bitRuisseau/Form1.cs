@@ -14,6 +14,8 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
+using WMPLib;
+using AxWMPLib;
 
 namespace matvelickov_bitRuisseau
 {
@@ -65,7 +67,6 @@ namespace matvelickov_bitRuisseau
             {
                 error_filename.Visible = false;
                 upload_media.Location = new Point(12, 267);
-
 
                 listMedia.Add(currentMedia);
                 mediaList.Items.Add(new System.IO.FileInfo(currentMedia.Filename).Name);
@@ -164,6 +165,11 @@ namespace matvelickov_bitRuisseau
         {
             delete_media.Visible = mediaList.SelectedItem != null;
             show_media.Visible = mediaList.SelectedItem != null;
+        }
+
+        private void showMedia_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
