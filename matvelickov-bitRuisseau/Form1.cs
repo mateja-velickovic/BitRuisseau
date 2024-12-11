@@ -37,6 +37,10 @@ namespace matvelickov_bitRuisseau
         List<string> videoAudioExt = new List<string>() { ".mp4", ".mov", ".mp3", ".wav" };
         List<string> imageExt = new List<string>() { ".gif", ".png", ".jpeg", ".jpg" };
 
+        /// <summary>
+        /// Main form
+        /// </summary>
+        /// <param name="broker"></param>
         public Form1(string broker)
         {
             InitializeComponent();
@@ -52,6 +56,10 @@ namespace matvelickov_bitRuisseau
             _agent.Start();
         }
 
+        /// <summary>
+        /// Receiving messages from the broker
+        /// </summary>
+        /// <param name="envelope"></param>
         private void OnMessageReceived(Envelope envelope)
         {
             switch (envelope.Type)
