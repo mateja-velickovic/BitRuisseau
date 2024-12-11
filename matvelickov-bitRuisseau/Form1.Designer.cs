@@ -38,6 +38,7 @@
             show_media = new Button();
             delete_media = new Button();
             wMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            txtconsole = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)showMedia).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wMediaPlayer).BeginInit();
             SuspendLayout();
@@ -108,7 +109,7 @@
             // 
             // showMedia
             // 
-            showMedia.Location = new Point(14, 375);
+            showMedia.Location = new Point(14, 343);
             showMedia.Margin = new Padding(4, 3, 4, 3);
             showMedia.Name = "showMedia";
             showMedia.Size = new Size(472, 284);
@@ -159,12 +160,20 @@
             // wMediaPlayer
             // 
             wMediaPlayer.Enabled = true;
-            wMediaPlayer.Location = new Point(14, 375);
+            wMediaPlayer.Location = new Point(14, 343);
             wMediaPlayer.Name = "wMediaPlayer";
             wMediaPlayer.OcxState = (AxHost.State)resources.GetObject("wMediaPlayer.OcxState");
             wMediaPlayer.Size = new Size(474, 284);
             wMediaPlayer.TabIndex = 9;
             wMediaPlayer.Visible = false;
+            // 
+            // txtconsole
+            // 
+            txtconsole.Location = new Point(493, 14);
+            txtconsole.Name = "txtconsole";
+            txtconsole.Size = new Size(409, 268);
+            txtconsole.TabIndex = 10;
+            txtconsole.Text = "";
             // 
             // Form1
             // 
@@ -172,6 +181,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(929, 671);
+            Controls.Add(txtconsole);
             Controls.Add(wMediaPlayer);
             Controls.Add(fullscreen_media);
             Controls.Add(showMedia);
@@ -200,6 +210,7 @@
         private System.Windows.Forms.Label error_filename;
         private System.Windows.Forms.Button fullscreen_media;
         private AxWMPLib.AxWindowsMediaPlayer wMediaPlayer;
+        private RichTextBox txtconsole;
     }
 }
 

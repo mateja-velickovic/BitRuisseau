@@ -6,27 +6,24 @@ using System.Threading.Tasks;
 
 namespace matvelickov_bitRuisseau
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Media
     {
-        public string Filename;
-        public long Size;
-
-        public Media(string filename, long size)
+        public Media(string filename, long size, MediaTypes mediaType)
         {
-            Filename = filename; 
-            Size = size;
+            this.filename = filename;
+
+            this.size = size / 1024;
+
+            this.mediaType = mediaType;
         }
 
-        enum MediaType
-        {
-            MP3,
-            MP4,
-            MOV,
-            GIF,
-            PNG,
-            JPEG,
-            JPG,
-            WAV
-        }
+        public string filename { get; set; }
+        public long size { get; set; } // Taille du fichier en Octets
+
+        public MediaTypes mediaType { get; set; }
+
     }
 }
