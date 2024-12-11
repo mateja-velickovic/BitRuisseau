@@ -29,155 +29,164 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.upload_media = new System.Windows.Forms.Button();
-            this.file_dialog = new System.Windows.Forms.OpenFileDialog();
-            this.mediaList = new System.Windows.Forms.ListBox();
-            this.error_filename = new System.Windows.Forms.Label();
-            this.fullscreen_media = new System.Windows.Forms.Button();
-            this.showMedia = new System.Windows.Forms.PictureBox();
-            this.show_media = new System.Windows.Forms.Button();
-            this.delete_media = new System.Windows.Forms.Button();
-            this.wMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            ((System.ComponentModel.ISupportInitialize)(this.showMedia)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wMediaPlayer)).BeginInit();
-            this.SuspendLayout();
+            upload_media = new Button();
+            file_dialog = new OpenFileDialog();
+            mediaList = new ListBox();
+            error_filename = new Label();
+            fullscreen_media = new Button();
+            showMedia = new PictureBox();
+            show_media = new Button();
+            delete_media = new Button();
+            wMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)showMedia).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)wMediaPlayer).BeginInit();
+            SuspendLayout();
             // 
             // upload_media
             // 
-            this.upload_media.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.upload_media.FlatAppearance.BorderSize = 0;
-            this.upload_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.upload_media.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upload_media.ForeColor = System.Drawing.Color.Transparent;
-            this.upload_media.Location = new System.Drawing.Point(12, 267);
-            this.upload_media.Name = "upload_media";
-            this.upload_media.Size = new System.Drawing.Size(165, 39);
-            this.upload_media.TabIndex = 1;
-            this.upload_media.Text = "Charger un média";
-            this.upload_media.UseVisualStyleBackColor = false;
-            this.upload_media.Click += new System.EventHandler(this.upload_media_Click);
+            upload_media.BackColor = SystemColors.HotTrack;
+            upload_media.FlatAppearance.BorderSize = 0;
+            upload_media.FlatStyle = FlatStyle.Flat;
+            upload_media.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            upload_media.ForeColor = Color.Transparent;
+            upload_media.Location = new Point(14, 292);
+            upload_media.Margin = new Padding(4, 3, 4, 3);
+            upload_media.Name = "upload_media";
+            upload_media.Size = new Size(192, 45);
+            upload_media.TabIndex = 1;
+            upload_media.Text = "Charger un média";
+            upload_media.UseVisualStyleBackColor = false;
+            upload_media.Click += upload_media_Click;
             // 
             // mediaList
             // 
-            this.mediaList.BackColor = System.Drawing.Color.GhostWhite;
-            this.mediaList.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mediaList.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.mediaList.FormattingEnabled = true;
-            this.mediaList.ItemHeight = 22;
-            this.mediaList.Location = new System.Drawing.Point(12, 12);
-            this.mediaList.Name = "mediaList";
-            this.mediaList.ScrollAlwaysVisible = true;
-            this.mediaList.Size = new System.Drawing.Size(405, 246);
-            this.mediaList.TabIndex = 3;
-            this.mediaList.SelectedIndexChanged += new System.EventHandler(this.mediaList_SelectedIndexChanged);
+            mediaList.BackColor = Color.GhostWhite;
+            mediaList.Font = new Font("Century Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            mediaList.ForeColor = SystemColors.HotTrack;
+            mediaList.FormattingEnabled = true;
+            mediaList.ItemHeight = 22;
+            mediaList.Location = new Point(14, 14);
+            mediaList.Margin = new Padding(4, 3, 4, 3);
+            mediaList.Name = "mediaList";
+            mediaList.ScrollAlwaysVisible = true;
+            mediaList.Size = new Size(472, 268);
+            mediaList.TabIndex = 3;
+            mediaList.SelectedIndexChanged += mediaList_SelectedIndexChanged;
             // 
             // error_filename
             // 
-            this.error_filename.AutoSize = true;
-            this.error_filename.BackColor = System.Drawing.Color.Transparent;
-            this.error_filename.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.error_filename.ForeColor = System.Drawing.Color.Firebrick;
-            this.error_filename.Location = new System.Drawing.Point(15, 261);
-            this.error_filename.Name = "error_filename";
-            this.error_filename.Size = new System.Drawing.Size(293, 19);
-            this.error_filename.TabIndex = 0;
-            this.error_filename.Text = "Un fichier avec le même nom existe déjà.";
-            this.error_filename.Visible = false;
+            error_filename.AutoSize = true;
+            error_filename.BackColor = Color.Transparent;
+            error_filename.Font = new Font("Century Gothic", 10F);
+            error_filename.ForeColor = Color.Firebrick;
+            error_filename.Location = new Point(14, 288);
+            error_filename.Margin = new Padding(4, 0, 4, 0);
+            error_filename.Name = "error_filename";
+            error_filename.Size = new Size(293, 19);
+            error_filename.TabIndex = 0;
+            error_filename.Text = "Un fichier avec le même nom existe déjà.";
+            error_filename.Visible = false;
             // 
             // fullscreen_media
             // 
-            this.fullscreen_media.BackColor = System.Drawing.Color.OliveDrab;
-            this.fullscreen_media.BackgroundImage = global::matvelickov_bitRuisseau.Properties.Resources.fs;
-            this.fullscreen_media.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.fullscreen_media.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fullscreen_media.FlatAppearance.BorderSize = 0;
-            this.fullscreen_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fullscreen_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fullscreen_media.ForeColor = System.Drawing.Color.Transparent;
-            this.fullscreen_media.Location = new System.Drawing.Point(318, 267);
-            this.fullscreen_media.Name = "fullscreen_media";
-            this.fullscreen_media.Size = new System.Drawing.Size(29, 39);
-            this.fullscreen_media.TabIndex = 8;
-            this.fullscreen_media.UseVisualStyleBackColor = false;
-            this.fullscreen_media.Visible = false;
+            fullscreen_media.BackColor = Color.OliveDrab;
+            fullscreen_media.BackgroundImage = Properties.Resources.fs;
+            fullscreen_media.BackgroundImageLayout = ImageLayout.Zoom;
+            fullscreen_media.Cursor = Cursors.Hand;
+            fullscreen_media.FlatAppearance.BorderSize = 0;
+            fullscreen_media.FlatStyle = FlatStyle.Flat;
+            fullscreen_media.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            fullscreen_media.ForeColor = Color.Transparent;
+            fullscreen_media.Location = new Point(370, 288);
+            fullscreen_media.Margin = new Padding(4, 3, 4, 3);
+            fullscreen_media.Name = "fullscreen_media";
+            fullscreen_media.Size = new Size(34, 45);
+            fullscreen_media.TabIndex = 8;
+            fullscreen_media.UseVisualStyleBackColor = false;
+            fullscreen_media.Visible = false;
+            fullscreen_media.Click += fullscreen_media_Click;
             // 
             // showMedia
             // 
-            this.showMedia.Location = new System.Drawing.Point(12, 312);
-            this.showMedia.Name = "showMedia";
-            this.showMedia.Size = new System.Drawing.Size(405, 246);
-            this.showMedia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.showMedia.TabIndex = 6;
-            this.showMedia.TabStop = false;
-            this.showMedia.Visible = false;
-            this.showMedia.Click += new System.EventHandler(this.showMedia_Click);
+            showMedia.Location = new Point(14, 375);
+            showMedia.Margin = new Padding(4, 3, 4, 3);
+            showMedia.Name = "showMedia";
+            showMedia.Size = new Size(472, 284);
+            showMedia.SizeMode = PictureBoxSizeMode.Zoom;
+            showMedia.TabIndex = 6;
+            showMedia.TabStop = false;
+            showMedia.Visible = false;
+            showMedia.Click += showMedia_Click;
             // 
             // show_media
             // 
-            this.show_media.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.show_media.BackgroundImage = global::matvelickov_bitRuisseau.Properties.Resources.eye;
-            this.show_media.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.show_media.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.show_media.FlatAppearance.BorderSize = 0;
-            this.show_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.show_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.show_media.ForeColor = System.Drawing.Color.Transparent;
-            this.show_media.Location = new System.Drawing.Point(353, 267);
-            this.show_media.Name = "show_media";
-            this.show_media.Size = new System.Drawing.Size(29, 39);
-            this.show_media.TabIndex = 5;
-            this.show_media.UseVisualStyleBackColor = false;
-            this.show_media.Visible = false;
-            this.show_media.Click += new System.EventHandler(this.show_media_Click);
+            show_media.BackColor = SystemColors.HotTrack;
+            show_media.BackgroundImage = Properties.Resources.eye;
+            show_media.BackgroundImageLayout = ImageLayout.Zoom;
+            show_media.Cursor = Cursors.Hand;
+            show_media.FlatAppearance.BorderSize = 0;
+            show_media.FlatStyle = FlatStyle.Flat;
+            show_media.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            show_media.ForeColor = Color.Transparent;
+            show_media.Location = new Point(412, 288);
+            show_media.Margin = new Padding(4, 3, 4, 3);
+            show_media.Name = "show_media";
+            show_media.Size = new Size(34, 45);
+            show_media.TabIndex = 5;
+            show_media.UseVisualStyleBackColor = false;
+            show_media.Visible = false;
+            show_media.Click += show_media_Click;
             // 
             // delete_media
             // 
-            this.delete_media.BackColor = System.Drawing.Color.Maroon;
-            this.delete_media.BackgroundImage = global::matvelickov_bitRuisseau.Properties.Resources.corbeille;
-            this.delete_media.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.delete_media.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.delete_media.FlatAppearance.BorderSize = 0;
-            this.delete_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.delete_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delete_media.ForeColor = System.Drawing.Color.Transparent;
-            this.delete_media.Location = new System.Drawing.Point(389, 267);
-            this.delete_media.Name = "delete_media";
-            this.delete_media.Size = new System.Drawing.Size(29, 39);
-            this.delete_media.TabIndex = 4;
-            this.delete_media.UseVisualStyleBackColor = false;
-            this.delete_media.Visible = false;
-            this.delete_media.Click += new System.EventHandler(this.delete_media_Click);
+            delete_media.BackColor = Color.Maroon;
+            delete_media.BackgroundImage = Properties.Resources.corbeille;
+            delete_media.BackgroundImageLayout = ImageLayout.Zoom;
+            delete_media.Cursor = Cursors.Hand;
+            delete_media.FlatAppearance.BorderSize = 0;
+            delete_media.FlatStyle = FlatStyle.Flat;
+            delete_media.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            delete_media.ForeColor = Color.Transparent;
+            delete_media.Location = new Point(452, 288);
+            delete_media.Margin = new Padding(4, 3, 4, 3);
+            delete_media.Name = "delete_media";
+            delete_media.Size = new Size(34, 45);
+            delete_media.TabIndex = 4;
+            delete_media.UseVisualStyleBackColor = false;
+            delete_media.Visible = false;
+            delete_media.Click += delete_media_Click;
             // 
             // wMediaPlayer
             // 
-            this.wMediaPlayer.Enabled = true;
-            this.wMediaPlayer.Location = new System.Drawing.Point(12, 312);
-            this.wMediaPlayer.Name = "wMediaPlayer";
-            this.wMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wMediaPlayer.OcxState")));
-            this.wMediaPlayer.Size = new System.Drawing.Size(405, 246);
-            this.wMediaPlayer.TabIndex = 9;
+            wMediaPlayer.Enabled = true;
+            wMediaPlayer.Location = new Point(14, 375);
+            wMediaPlayer.Name = "wMediaPlayer";
+            wMediaPlayer.OcxState = (AxHost.State)resources.GetObject("wMediaPlayer.OcxState");
+            wMediaPlayer.Size = new Size(474, 284);
+            wMediaPlayer.TabIndex = 9;
+            wMediaPlayer.Visible = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(960, 638);
-            this.Controls.Add(this.wMediaPlayer);
-            this.Controls.Add(this.fullscreen_media);
-            this.Controls.Add(this.showMedia);
-            this.Controls.Add(this.show_media);
-            this.Controls.Add(this.delete_media);
-            this.Controls.Add(this.mediaList);
-            this.Controls.Add(this.upload_media);
-            this.Controls.Add(this.error_filename);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.showMedia)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wMediaPlayer)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
+            ClientSize = new Size(929, 671);
+            Controls.Add(wMediaPlayer);
+            Controls.Add(fullscreen_media);
+            Controls.Add(showMedia);
+            Controls.Add(show_media);
+            Controls.Add(delete_media);
+            Controls.Add(mediaList);
+            Controls.Add(upload_media);
+            Controls.Add(error_filename);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "Form1";
+            Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)showMedia).EndInit();
+            ((System.ComponentModel.ISupportInitialize)wMediaPlayer).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -14,8 +14,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
-using WMPLib;
-using AxWMPLib;
+using System.Threading;
 
 namespace matvelickov_bitRuisseau
 {
@@ -66,7 +65,7 @@ namespace matvelickov_bitRuisseau
             if (!mediaList.Items.Contains(new System.IO.FileInfo(currentMedia.Filename).Name))
             {
                 error_filename.Visible = false;
-                upload_media.Location = new Point(12, 267);
+                upload_media.Location = new Point(14, 292);
 
                 listMedia.Add(currentMedia);
                 mediaList.Items.Add(new System.IO.FileInfo(currentMedia.Filename).Name);
@@ -75,7 +74,7 @@ namespace matvelickov_bitRuisseau
             else 
             {
                 error_filename.Visible = true;
-                upload_media.Location = new Point(12, 287);
+                upload_media.Location = new Point(14, 312);
             }
 
             // TODO Select the uploaded file on upload
@@ -138,7 +137,7 @@ namespace matvelickov_bitRuisseau
         /// <param name="path"></param>
         private void ShowImage(string path)
         {
-            wMediaPlayer.Visible = false;
+            // wMediaPlayer.Visible = false;
             showMedia.Visible = true;
 
             showMedia.Image = Image.FromFile(path);
@@ -165,11 +164,19 @@ namespace matvelickov_bitRuisseau
         {
             delete_media.Visible = mediaList.SelectedItem != null;
             show_media.Visible = mediaList.SelectedItem != null;
+            fullscreen_media.Visible = mediaList.SelectedItem != null;
+        }
+
+        private void fullscreen_media_Click(object sender, EventArgs e)
+        {
+
+
         }
 
         private void showMedia_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }
