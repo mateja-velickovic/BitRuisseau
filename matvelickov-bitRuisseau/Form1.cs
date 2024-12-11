@@ -60,13 +60,25 @@ namespace matvelickov_bitRuisseau
             string file_name = new System.IO.FileInfo(file_dialog.FileName).FullName;
 
             Media currentMedia = new Media(file_name, file_size);
-            listMedia.Add(currentMedia);
 
-            mediaList.Items.Add(new System.IO.FileInfo(currentMedia.Filename).Name);
+            if (!mediaList.Items.Contains(new System.IO.FileInfo(currentMedia.Filename).Name))
+            {
+                error_filename.Visible = false;
+                upload_media.Location = new Point(12, 267);
+
+
+                listMedia.Add(currentMedia);
+                mediaList.Items.Add(new System.IO.FileInfo(currentMedia.Filename).Name);
+                mediaList.SelectedItem = new System.IO.FileInfo(currentMedia.Filename).Name;
+            }
+            else 
+            {
+                error_filename.Visible = true;
+                upload_media.Location = new Point(12, 287);
+            }
 
             // TODO Select the uploaded file on upload
             // TODO Display horizontaly the items
-            mediaList.SelectedItem = new System.IO.FileInfo(currentMedia.Filename).Name;
         }
 
         /// <summary>
@@ -96,6 +108,7 @@ namespace matvelickov_bitRuisseau
 
                 showMedia.Image = null;
                 wMediaPlayer.URL = null;
+                wMediaPlayer.Visible = false;
             }
         }
 
@@ -114,7 +127,7 @@ namespace matvelickov_bitRuisseau
 
             if (imageExt.Contains(ext))
                 ShowImage(path);
-            if(videoAudioExt.Contains(ext) || videoAudioExt.Contains(ext))
+            if (videoAudioExt.Contains(ext))
                 ShowVideo(path);
         }
 

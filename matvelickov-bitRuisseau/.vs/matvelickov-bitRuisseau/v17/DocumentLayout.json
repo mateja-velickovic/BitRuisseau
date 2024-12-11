@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|c:\\users\\pe04uhp\\desktop\\bit-ruisseau\\matvelickov-bitruisseau\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|c:\\users\\pe04uhp\\desktop\\bit-ruisseau\\matvelickov-bitruisseau\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|solutionrelative:media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\medialibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|solutionrelative:medialibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\medialibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E72E3E3E-6FFF-4551-8442-ACC06790A020}|matvelickov-bitRuisseau.csproj|solutionrelative:medialibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,38 +26,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 71,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Media.cs",
-              "DocumentMoniker": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Media.cs",
-              "RelativeDocumentMoniker": "Media.cs",
-              "ToolTip": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Media.cs",
-              "RelativeToolTip": "Media.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAeAAAA",
+              "DocumentIndex": 0,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAWwH8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-27T14:19:27.876Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-12-11T13:01:38.831Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAiwG0AAAAMAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T14:48:23.246Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MediaLibrary.cs",
               "DocumentMoniker": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\MediaLibrary.cs",
               "RelativeDocumentMoniker": "MediaLibrary.cs",
@@ -70,7 +69,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\pe04uhp\\Desktop\\bit-ruisseau\\matvelickov-bitRuisseau\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
