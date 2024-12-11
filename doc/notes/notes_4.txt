@@ -1,0 +1,5 @@
+11.12.2024
+Discussion sur le catalogue
+
+Importer le backend du powercher dans notre projet bit-ruisseau.
+Créer un agent pour notre médiathèque et envoyer les premiers messages.
