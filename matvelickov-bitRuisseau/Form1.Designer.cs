@@ -140,7 +140,7 @@
             this.delete_media.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delete_media.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delete_media.ForeColor = System.Drawing.Color.Transparent;
-            this.delete_media.Location = new System.Drawing.Point(388, 267);
+            this.delete_media.Location = new System.Drawing.Point(389, 267);
             this.delete_media.Name = "delete_media";
             this.delete_media.Size = new System.Drawing.Size(29, 39);
             this.delete_media.TabIndex = 4;
