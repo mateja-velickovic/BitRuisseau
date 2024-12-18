@@ -63,16 +63,6 @@ namespace Frontend.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap beer {
-            get {
-                object obj = ResourceManager.GetObject("beer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap broadcast {
             get {
                 object obj = ResourceManager.GetObject("broadcast", resourceCulture);
@@ -86,16 +76,6 @@ namespace Frontend.Properties {
         internal static System.Drawing.Bitmap broadcastNo {
             get {
                 object obj = ResourceManager.GetObject("broadcastNo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chambre {
-            get {
-                object obj = ResourceManager.GetObject("chambre", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,49 +153,9 @@ namespace Frontend.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngtree_thermal_energy_heat_pump_unit_png_png_image_11576182 {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-thermal-energy-heat-pump-unit-png-png-image_11576182", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngtree_thermal_energy_heat_pump_unit_png_png_image_115761821 {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-thermal-energy-heat-pump-unit-png-png-image_115761821", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngtree_thermal_energy_heat_pump_unit_png_png_image_115761822 {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-thermal-energy-heat-pump-unit-png-png-image_115761822", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap powercoin {
             get {
                 object obj = ResourceManager.GetObject("powercoin", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ps5 {
-            get {
-                object obj = ResourceManager.GetObject("ps5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -2,9 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="HouseUI_mvc.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="HouseWatcher.cs">
       <SubType>Form</SubType>
     </Compile>

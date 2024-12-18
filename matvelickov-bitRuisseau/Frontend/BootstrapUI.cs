@@ -29,8 +29,7 @@ public partial class BootstrapUI : Form
 
     private void btnBroadcastAgent_Click(object sender, EventArgs e)
     {
-        HouseUI_mvc houseUI = new HouseUI_mvc(dpdBroker.Text);
-
+        HouseUI houseUI = new HouseUI(dpdBroker.Text);
         houseUI.Show();
     }
 

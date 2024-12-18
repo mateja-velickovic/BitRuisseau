@@ -51,12 +51,12 @@ namespace Frontend
                     PowerTransaction powtr = JsonSerializer.Deserialize<PowerTransaction>(envelope.Message);
                     switch (powtr.Type)
                     {
-                        case PowerTransactionType.SALE:
+                        case PowerTransactionType.ENERGY_OFFER_RESPONSE:
                             // we currently don't purchase energy from houses
                             break;
-                        case PowerTransactionType.REQUEST:
+                        case PowerTransactionType.ENERGY_NEED_REQUEST:
                             // Accept all deals for now, but on my terms
-                            PowerTransaction response = new PowerTransaction(PowerTransactionType.SALE, powtr.Amount * (double)nudKwhPrice.Value, powtr.Amount);
+                            PowerTransaction response = new PowerTransaction(PowerTransactionType.ENERGY_OFFER_RESPONSE, powtr.Amount * (double)nudKwhPrice.Value, powtr.Amount);
                             _agent.Send(new Envelope(_agent.NodeId, MessageType.POWER, response.ToJson(), envelope.SenderId));
                             break;
                     }
@@ -72,7 +72,7 @@ namespace Frontend
         private void nudKwhPrice_ValueChanged(object sender, EventArgs e)
         {
             // regenerate the price offer envelope with new Id
-            _priceOffer = new PowerTransaction(PowerTransactionType.OFFER, (double)nudKwhPrice.Value, 1.0);
+            _priceOffer = new PowerTransaction(PowerTransactionType.ENERGY_OFFER_REQUEST, (double)nudKwhPrice.Value, 1.0);
             _priceBroadcast = new Envelope(_agent.NodeId, MessageType.POWER, _priceOffer.ToJson());
         }
     }
