@@ -1,0 +1,8 @@
+18.12.2024
+Points designs spécifiques à documenter
+= Je vais faire comme ça
+
+1. Copier le dossier backend/frontend dans le dossier du projet
+2. Ajouter la référence sur le dossier ajouté
+
+Améliorer les users stories (rendre les phrases + "humaines")
