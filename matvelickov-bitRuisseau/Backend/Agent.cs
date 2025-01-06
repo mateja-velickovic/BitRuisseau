@@ -25,7 +25,6 @@ public class Agent
 
     private readonly Dictionary<string, ICommunicator> _communicators = new();
 
-
     public int NodesCount => _nodes.Count;
     public ImmutableDictionary<string, object> Nodes => _nodes.ToImmutableDictionary();
 
@@ -48,7 +47,6 @@ public class Agent
 
         //Register itself
         _nodes.Add(NodeId, "nada");
-
     }
 
     private void DefaultOnMessageReceived(Envelope envelope)
@@ -84,7 +82,6 @@ public class Agent
 
         //Hello
         Send(new Envelope(this.NodeId, MessageType.HELLO, ""));
-
     }
 
     public void Stop()
@@ -107,13 +104,8 @@ public class Agent
         _logger.LogInformation("{} sent", envelope);
     }
 
-
     public override string ToString()
     {
         return $"Powercher Agent {this.NodeId}";
     }
-
-
-
-
 }

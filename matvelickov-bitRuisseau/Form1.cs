@@ -90,7 +90,6 @@ namespace matvelickov_bitRuisseau
             string ext = new System.IO.FileInfo(file_dialog.FileName).Extension;
             MediaTypes file_ext = GetExtension(ext);
 
-
             Media currentMedia = new Media(file_name, file_size, file_ext);
 
             if (!mediaList.Items.Contains(new System.IO.FileInfo(currentMedia.filename).Name))
@@ -231,13 +230,9 @@ namespace matvelickov_bitRuisseau
 
         private void fullscreen_media_Click(object sender, EventArgs e)
         {
-
-
         }
-
         private void showMedia_Click(object sender, EventArgs e)
         {
-
         }
 
     }
