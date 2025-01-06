@@ -7,20 +7,10 @@
 ///                                                      ///
 ////////////////////////////////////////////////////////////
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.IO.Ports;
-using System.Linq;
-using System.Windows.Forms;
-using System.Threading;
 using Backend;
+using Frontend;
 using Frontend.Logging;
 using Backend.Protocol;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace matvelickov_bitRuisseau
 {
@@ -45,14 +35,13 @@ namespace matvelickov_bitRuisseau
         {
             InitializeComponent();
 
-            var loggerFactory = LoggerFactory.Create(
+           var loggerFactory = LoggerFactory.Create(
                 builder => builder
                     .AddProvider(new RichTextBoxLoggerProvider(txtconsole))
                     .SetMinimumLevel(LogLevel.Debug)
                 );
             _logger = loggerFactory.CreateLogger<Form1>();
             _agent = new Agent(loggerFactory, broker, OnMessageReceived);
-
             _agent.Start();
         }
 

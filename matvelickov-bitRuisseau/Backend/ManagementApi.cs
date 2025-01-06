@@ -1,7 +1,6 @@
 using Backend.Protocol;
 
 namespace Backend;
-
 public class ManagementApi
 {
     private readonly Agent agent;

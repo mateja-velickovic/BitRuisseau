@@ -10,9 +10,6 @@
     <Compile Update="Frontend\HouseUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Frontend\HouseUI_mvc.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Frontend\HouseWatcher.cs">
       <SubType>Form</SubType>
     </Compile>

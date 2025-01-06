@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Backend;
 using Backend.Protocol;
-using DataModel;
 using Frontend.Logging;
 using Microsoft.Extensions.Logging;
 
@@ -10,7 +9,6 @@ namespace Frontend
 {
     public partial class HouseUI : Form
     {
-        private House _house;
         private Agent _agent;
         private readonly ILogger _logger;
 
@@ -30,8 +28,6 @@ namespace Frontend
             this.Text = $@"House {_agent.NodeId}";
             
             //Business components
-            _house = new House(_agent.NodeId,"TODO","TODO");
-
         }
         
         // Avoid race condition on txtConsole
@@ -53,7 +49,6 @@ namespace Frontend
                     _logger.LogInformation(envelope.SenderId + "Said Hello");
                     break;
                 case MessageType.HOUSE_STATUS_REQUEST:
-                    _agent.Send(new Envelope("Maison témoin", MessageType.HOUSE_STATUS, JsonSerializer.Serialize(_house)));
                     break;
             }
         }

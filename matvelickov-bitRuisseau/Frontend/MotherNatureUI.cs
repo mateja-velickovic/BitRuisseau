@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Backend;
 using Backend.Protocol;
-using DataModel;
 using Frontend.Logging;
 using Microsoft.Extensions.Logging;
 
@@ -17,7 +16,6 @@ public partial class MotherNatureUI : Form
     private TimeSpan delta;
     private double cloudCover = 0.5;
     private int windSpeed = 10;
-    private WindDirections windDirection = WindDirections.S;
     private readonly bool _encrypt;
 
 
@@ -29,7 +27,6 @@ public partial class MotherNatureUI : Form
 
         var loggerFactory = LoggerFactory.Create(
             builder => builder
-                .AddConsole()
                 .SetMinimumLevel(LogLevel.Debug)
         );
         logger = loggerFactory.CreateLogger<MotherNatureUI>();
@@ -45,17 +42,11 @@ public partial class MotherNatureUI : Form
         if (random.Next(5) == 0) windSpeed = Math.Max(0, Math.Min(MAX_WIND_SPEED, windSpeed + random.Next(-1, 2)));
         if (random.Next(10) == 0)
         {
-            Array values = Enum.GetValues(typeof(WindDirections));
-            int currentIndex = Array.IndexOf(values, windDirection);
-            int newIndex = (currentIndex + random.Next(-1, 2) + values.Length) % values.Length;
-            windDirection = (WindDirections)values.GetValue(newIndex)!;
         }
         double solarPower = SolarPowerCalculator.CalculateSolarPower(simutime ?? DateTime.Now);
 
 
         // Publish environment
-        TownEnvironment townEnvironment = new TownEnvironment((DateTime)simutime, cloudCover, solarPower, windSpeed, windDirection);
-        agent.Send(new Envelope(agent.NodeId, MessageType.TOWN_ENVIRONMENT, townEnvironment.ToJson()));
 
         // Move time
         simutime += delta; // compute the new simulated time
@@ -65,7 +56,6 @@ public partial class MotherNatureUI : Form
         lblSolarPower.Text = solarPower.ToString("P1");
         lblCloudCover.Text = cloudCover.ToString("P1");
         lblWindSpeed.Text = windSpeed.ToString() + " Km/h";
-        lblWindDirection.Text = windDirection.ToString();
     }
 
     private void cmdStart_Click(object sender, EventArgs e)

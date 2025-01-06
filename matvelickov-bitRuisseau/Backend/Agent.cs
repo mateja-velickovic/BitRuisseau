@@ -6,7 +6,6 @@
 using System.Collections.Immutable;
 using System.Text.Json;
 using Backend.Protocol;
-using PowerCrypt;
 
 namespace Backend;
 
@@ -50,7 +49,6 @@ public class Agent
         //Register itself
         _nodes.Add(NodeId, "nada");
 
-        _encrypt = EncryptionHelper.Initialize();
     }
 
     private void DefaultOnMessageReceived(Envelope envelope)

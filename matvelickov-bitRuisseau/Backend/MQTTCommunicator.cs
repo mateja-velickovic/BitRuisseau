@@ -4,13 +4,12 @@ using System.Text;
 using Backend.Protocol;
 using MQTTnet;
 using MQTTnet.Protocol;
-using PowerCrypt;
 
 namespace Backend;
 
 public class MqttCommunicator : ICommunicator
 {
-    private const string DefaultTopic = "powercher";
+    private const string DefaultTopic = "media/player";
     private readonly string _brokerIp;
     private IMqttClient _mqttClient;
     private readonly ILogger _logger;
@@ -36,7 +35,6 @@ public class MqttCommunicator : ICommunicator
         _username = username;
         _password = password;
         _mqttClient = _factory.CreateMqttClient();
-        _encrypt = EncryptionHelper.Initialize();
     }
 
     IPAddress GetPreferredIpAddress(string host)
@@ -55,12 +53,10 @@ public class MqttCommunicator : ICommunicator
         {
             Connect();
         }
-        string payload = _encrypt ? EncryptionHelper.EncryptString(envelope.ToJson()) : envelope.ToJson();
         var applicationMessage = new MqttApplicationMessageBuilder()
             .WithTopic(topic ?? _topic)
             .WithRetainFlag(_retain)
             .WithQualityOfServiceLevel(_qos)
-            .WithPayload(payload)
             .Build();
 
         //Async => sync
@@ -87,7 +83,6 @@ public class MqttCommunicator : ICommunicator
             var payload = Encoding.UTF8.GetString(message.ApplicationMessage.Payload);
             try
             {
-                if (_encrypt) payload = EncryptionHelper.DecryptString(payload);
                 var envelope = Envelope.FromJson(payload);
                 OnMessageReceived(envelope);
 
