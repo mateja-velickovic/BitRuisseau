@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// using DataModel;
 
 namespace Frontend
 {
@@ -19,15 +18,6 @@ namespace Frontend
         public HouseWatcher()
         {
             InitializeComponent();
-        }
-
-        public void Update(/*House model*/)
-        {
-         /*   lblCash.Text = model.Cash.ToString("C2");
-            this.lblDisplayName.Text = model.DisplayName;
-            lblUPS.Text = model.UPSCharge.ToString("F2")+"%";
-            this.lblCTime.Text = model.Environment == null ? "???" : model.Environment.DateTime.ToString("F");
-            this.Refresh();*/
         }
 
         private void HouseWatcher_MouseDown(object sender, MouseEventArgs e)

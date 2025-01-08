@@ -14,7 +14,7 @@ public class Envelope(string senderId, MessageType type, string message,string r
     
     public MessageType Type { get; init; } = type;
 
-    public string Message { get; set; } = message;
+    public string Message { get; init; } = message;
 
     public string ToJson()
     {

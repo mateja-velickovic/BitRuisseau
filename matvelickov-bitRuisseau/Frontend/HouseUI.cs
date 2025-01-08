@@ -26,8 +26,6 @@ namespace Frontend
             _agent = new Agent(loggerFactory, broker, OnMessageReceived);
 
             this.Text = $@"House {_agent.NodeId}";
-            
-            //Business components
         }
         
         // Avoid race condition on txtConsole
@@ -37,23 +35,10 @@ namespace Frontend
             _agent.Start();
         }
 
-        
-
         private void OnMessageReceived(Envelope envelope)
         {
-            _logger.LogInformation(envelope.ToString());
-            
-            switch (envelope.Type)
-            {
-                case MessageType.HELLO:
-                    _logger.LogInformation(envelope.SenderId + "Said Hello");
-                    break;
-                case MessageType.HOUSE_STATUS_REQUEST:
-                    break;
-            }
         }
-
-
+            
         private void HouseUI_Load(object sender, EventArgs e)
         {
 

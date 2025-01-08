@@ -1,10 +1,11 @@
-﻿using System;
+﻿using bit_ruisseau;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace matvelickov_bitRuisseau
+namespace bit_ruisseau
 {
     public class Mediatheque
     {

@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Backend.Protocol;
@@ -9,7 +9,7 @@ namespace Backend;
 
 public class MqttCommunicator : ICommunicator
 {
-    private const string DefaultTopic = "media/player";
+    private const string DefaultTopic = "powercher";
     private readonly string _brokerIp;
     private IMqttClient _mqttClient;
     private readonly ILogger _logger;
@@ -17,16 +17,15 @@ public class MqttCommunicator : ICommunicator
     private readonly string _password;
     private readonly string _nodeId;
     private readonly string _topic;
-    private readonly bool _encrypt;
 
-    private readonly MqttClientFactory _factory = new();
-
+    private readonly MqttClientFactory _factory = new ();
+    
     private bool _retain = false;
     private MqttQualityOfServiceLevel _qos = MqttQualityOfServiceLevel.AtLeastOnce;
 
     public MqttCommunicator(ILoggerFactory loggerFactory,
-        string brokerHost, string nodeId, string topic = MqttCommunicator.DefaultTopic,
-        string username = "ict", string password = "321")
+        string brokerHost,string nodeId,string topic=MqttCommunicator.DefaultTopic,
+        string username="ict", string password="321")
     {
         _nodeId = nodeId;
         _topic = topic;
@@ -41,12 +40,12 @@ public class MqttCommunicator : ICommunicator
     {
         //priority on the dgep ipv4 address
         return Dns.GetHostAddresses(host)
-            .Where(/*V4*/address => address.AddressFamily == AddressFamily.InterNetwork)
-            .Where(address => address.ToString().StartsWith("10"))
+            .Where(/*V4*/address=>address.AddressFamily == AddressFamily.InterNetwork)
+            .Where(address=>address.ToString().StartsWith("10"))
             .FirstOrDefault(Dns.GetHostAddresses(host)[0]);
     }
 
-    public void Send(Envelope envelope, string? topic = null)
+    public void Send(Envelope envelope,string? topic = null)
     {
         //For Senders only
         if (!_mqttClient.IsConnected)
@@ -54,9 +53,10 @@ public class MqttCommunicator : ICommunicator
             Connect();
         }
         var applicationMessage = new MqttApplicationMessageBuilder()
-            .WithTopic(topic ?? _topic)
+            .WithTopic(topic??_topic)
             .WithRetainFlag(_retain)
             .WithQualityOfServiceLevel(_qos)
+            .WithPayload(envelope.ToJson())
             .Build();
 
         //Async => sync
@@ -72,13 +72,13 @@ public class MqttCommunicator : ICommunicator
     {
         //register context to be able to propagate exception to caller thread
         var syncContext = SynchronizationContext.Current;
-
+        
         // Setup message handling before connecting so that queued messages
         // are also handled properly. When there is no event handler attached all
         // received messages get lost.
         _mqttClient.ApplicationMessageReceivedAsync += message =>
         {
-            _logger.LogDebug("Received message {}", message.ApplicationMessage.Topic);
+            _logger.LogDebug("Received message {}",message.ApplicationMessage.Topic);
 
             var payload = Encoding.UTF8.GetString(message.ApplicationMessage.Payload);
             try
@@ -90,17 +90,9 @@ public class MqttCommunicator : ICommunicator
             }
             catch (Exception e)
             {
-                if (_encrypt)
-                {
-                    // ignore unencrypted messages
-                    return Task.CompletedTask;
-                }
-                else
-                {
-                    // Post exception to main thread
-                    syncContext?.Post(_ => throw new Exception("Exception occurred in MQTT message handler.", e), null);
-                    return Task.FromException(e);
-                }
+                // Post exception to main thread
+                syncContext?.Post(_ => throw new Exception("Exception occurred in MQTT message handler.", e), null);
+                return Task.FromException(e);
             }
 
         };
@@ -114,8 +106,8 @@ public class MqttCommunicator : ICommunicator
             .WithTopicFilter(_topic,
                 _qos,
                 //noLocal:..,
-                retainAsPublished: _retain,
-                retainHandling: MqttRetainHandling.SendAtSubscribe)
+                retainAsPublished:_retain,
+                retainHandling:MqttRetainHandling.SendAtSubscribe)
             .Build();
 
         var subscriptionResult = _mqttClient.SubscribeAsync(mqttSubscribeOptions).Result;
@@ -131,7 +123,7 @@ public class MqttCommunicator : ICommunicator
         var options = new MqttClientOptionsBuilder()
             .WithClientId(_nodeId)
             .WithTcpServer(_brokerIp, 1883) //
-            .WithCredentials(_username, _password)
+            .WithCredentials(_username,_password)
             .Build();
 
         var connectResult = _mqttClient.ConnectAsync(options).Result;

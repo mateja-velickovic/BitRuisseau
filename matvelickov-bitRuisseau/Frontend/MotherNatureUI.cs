@@ -16,8 +16,6 @@ public partial class MotherNatureUI : Form
     private TimeSpan delta;
     private double cloudCover = 0.5;
     private int windSpeed = 10;
-    private readonly bool _encrypt;
-
 
     private Random random = new Random();
 
@@ -27,6 +25,7 @@ public partial class MotherNatureUI : Form
 
         var loggerFactory = LoggerFactory.Create(
             builder => builder
+                .AddConsole()
                 .SetMinimumLevel(LogLevel.Debug)
         );
         logger = loggerFactory.CreateLogger<MotherNatureUI>();
@@ -38,22 +37,8 @@ public partial class MotherNatureUI : Form
     private void tmrPulse_Tick(object sender, EventArgs e)
     {
         // Change weather conditions
-        cloudCover = Math.Max(0, Math.Min(1.0, cloudCover + random.Next(-1, 2) / 1000.0));
-        if (random.Next(5) == 0) windSpeed = Math.Max(0, Math.Min(MAX_WIND_SPEED, windSpeed + random.Next(-1, 2)));
-        if (random.Next(10) == 0)
-        {
-        }
-        double solarPower = SolarPowerCalculator.CalculateSolarPower(simutime ?? DateTime.Now);
-
-
-        // Publish environment
-
-        // Move time
-        simutime += delta; // compute the new simulated time
-
-        // Update display
-        lblSimutime.Text = simutime?.ToString("dd.MM.yyyy HH:mm");
-        lblSolarPower.Text = solarPower.ToString("P1");
+        cloudCover = Math.Max(0,Math.Min(1.0, cloudCover + random.Next(-1,2)/1000.0));
+        if (random.Next(5) == 0) windSpeed = Math.Max(0, Math.Min(MAX_WIND_SPEED, windSpeed + random.Next(-1,2)));
         lblCloudCover.Text = cloudCover.ToString("P1");
         lblWindSpeed.Text = windSpeed.ToString() + " Km/h";
     }

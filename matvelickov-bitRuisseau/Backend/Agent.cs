@@ -13,7 +13,6 @@ public class Agent
 {
     private const string CommunicatorUdp = "udp";
     private const string CommunicatorMqtt = "mqtt";
-    private readonly bool _encrypt;
 
 
     private readonly ClusterStatistics _statistics;
@@ -22,31 +21,32 @@ public class Agent
     public readonly string NodeId;
 
     private readonly Dictionary<string, object> _nodes = new();
-
-    private readonly Dictionary<string, ICommunicator> _communicators = new();
-
+    
+    private readonly Dictionary<string,ICommunicator> _communicators = new();
+    
+    
     public int NodesCount => _nodes.Count;
-    public ImmutableDictionary<string, object> Nodes => _nodes.ToImmutableDictionary();
+    public ImmutableDictionary<string,object> Nodes => _nodes.ToImmutableDictionary();
 
     private readonly ILogger _logger;
 
-    public Agent(ILoggerFactory loggerFactory, string broker, Action<Envelope>? onMessageReceived = null, bool isMotherNature = false, string idPrefix = "")
+    public Agent(ILoggerFactory loggerFactory, string broker, Action<Envelope>? onMessageReceived=null,bool isMotherNature=false,string idPrefix="")
     {
         _logger = loggerFactory.CreateLogger($"Powercher Agent {NodeId}");
 
         _statistics = new(_nodes);
 
-        NodeId = (isMotherNature ? "MN-" : "") + idPrefix + Guid.NewGuid();
-
+        NodeId = (isMotherNature?"MN-":"")+idPrefix + Guid.NewGuid();
+        
         //broadcast on wifi not working a lot...
         //_communicators.Add(CommunicatorUdp,new UdpCommunicator(loggerFactory,NodeId,broadcast));
-        _communicators.Add(CommunicatorMqtt, new MqttCommunicator(loggerFactory, broker, NodeId));
-
+        _communicators.Add(CommunicatorMqtt,new MqttCommunicator(loggerFactory,broker,NodeId));
+        
         //Messages handling
-        _communicators.Values.ToList().ForEach(communicator => communicator.OnMessageReceived = onMessageReceived ?? DefaultOnMessageReceived);
-
+        _communicators.Values.ToList().ForEach(communicator=>communicator.OnMessageReceived=onMessageReceived??DefaultOnMessageReceived);
+        
         //Register itself
-        _nodes.Add(NodeId, "nada");
+        _nodes.Add(NodeId,"nada");
     }
 
     private void DefaultOnMessageReceived(Envelope envelope)
@@ -54,39 +54,40 @@ public class Agent
         switch (envelope.Type)
         {
             case MessageType.HELLO:
-                _logger.LogDebug("Received Hello  from {sender}", envelope.SenderId);
+                _logger.LogDebug("Received Hello  from {sender}",envelope.SenderId);
                 if (_nodes.TryAdd(envelope.SenderId, "nada"))
                 {
-                    _logger.LogDebug("Added new sender {sender}", envelope.SenderId);
+                    _logger.LogDebug("Added new sender {sender}",envelope.SenderId);
                 }
                 break;
             case MessageType.GOOD_BYE:
-                _logger.LogDebug("Received GoodBye  from {sender}", envelope.SenderId);
+                _logger.LogDebug("Received GoodBye  from {sender}",envelope.SenderId);
                 if (_nodes.Remove(envelope.SenderId))
                 {
-                    _logger.LogDebug("Removed sender {sender}", envelope.SenderId);
+                    _logger.LogDebug("Removed sender {sender}",envelope.SenderId);
                 }
                 break;
             default:
-                _logger.LogInformation("Received message {message}", envelope);
+                _logger.LogInformation("Received message {message}",envelope);
                 break;
         }
-
+        
         _statistics.MessagesReceived++;
     }
 
     // Start listening on a dedicated thread
     public void Start()
     {
-        _communicators.Values.ToList().ForEach(communicator => communicator.Start());
-
+        _communicators.Values.ToList().ForEach(communicator =>communicator.Start());
+        
         //Hello
-        Send(new Envelope(this.NodeId, MessageType.HELLO, ""));
+        MessageType.HELLO.Send(this,null);
+        
     }
 
     public void Stop()
     {
-        Send(new Envelope(this.NodeId, MessageType.GOOD_BYE, ""));
+        MessageType.GOOD_BYE.Send(this,null);
         _communicators.Values.ToList().ForEach(communicator => communicator.Stop());
     }
 
@@ -95,17 +96,21 @@ public class Agent
         string communicatorId;
         switch (envelope.Type)
         {
-            default:
-                communicatorId = CommunicatorMqtt;
+            default: communicatorId = CommunicatorMqtt;
                 break;
         }
         _communicators[communicatorId].Send(envelope);
         _statistics.MessagesSent++;
-        _logger.LogInformation("{} sent", envelope);
+        _logger.LogInformation("{} sent",envelope);
     }
+
 
     public override string ToString()
     {
         return $"Powercher Agent {this.NodeId}";
     }
+
+
+
+
 }

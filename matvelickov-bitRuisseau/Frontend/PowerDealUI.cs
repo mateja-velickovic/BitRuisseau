@@ -22,18 +22,18 @@ namespace Frontend
         private Agent _agent;
         private Envelope? _priceBroadcast = null;
 
-
         public PowerDealUI(string broker)
         {
             InitializeComponent();
             var loggerFactory = LoggerFactory.Create(
                 builder => builder
+                    .AddConsole()
                     .SetMinimumLevel(LogLevel.Debug)
             );
             _logger = loggerFactory.CreateLogger<PowerWatchUI>();
-            _agent = new Agent(loggerFactory, broker, OnMessageReceived, idPrefix: "PD-");
+            _agent = new Agent(loggerFactory, broker, OnMessageReceived, idPrefix:"PD-");
             _agent.Start();
-            nudKwhPrice_ValueChanged(new Object(), new EventArgs());
+            nudKwhPrice_ValueChanged(new Object(),new EventArgs());
         }
 
         private void OnMessageReceived(Envelope envelope)

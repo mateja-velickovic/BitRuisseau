@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 ///                                                      ///
 ///     ETML, Vennes                                     ///
 ///     Author : Velickovic Mateja (matvelickov)         ///
@@ -8,11 +8,12 @@
 ////////////////////////////////////////////////////////////
 
 using Backend;
-using Frontend;
-using Frontend.Logging;
 using Backend.Protocol;
+using bit_ruisseau.bit_ruisseau;
+using Frontend.Logging;
+using System.Text.Json;
 
-namespace matvelickov_bitRuisseau
+namespace bit_ruisseau
 {
     public partial class Form1 : Form
     {
@@ -35,11 +36,11 @@ namespace matvelickov_bitRuisseau
         {
             InitializeComponent();
 
-           var loggerFactory = LoggerFactory.Create(
-                builder => builder
-                    .AddProvider(new RichTextBoxLoggerProvider(txtconsole))
-                    .SetMinimumLevel(LogLevel.Debug)
-                );
+            var loggerFactory = LoggerFactory.Create(
+                 builder => builder
+                     .AddProvider(new RichTextBoxLoggerProvider(txtconsole))
+                     .SetMinimumLevel(LogLevel.Debug)
+                 );
             _logger = loggerFactory.CreateLogger<Form1>();
             _agent = new Agent(loggerFactory, broker, OnMessageReceived);
             _agent.Start();
@@ -51,12 +52,37 @@ namespace matvelickov_bitRuisseau
         /// <param name="envelope"></param>
         private void OnMessageReceived(Envelope envelope)
         {
+            // Ignorer mes propre messages
+            if (envelope.SenderId == _agent.NodeId) return;
+
+            _logger.LogInformation(envelope.ToString());
+
             switch (envelope.Type)
             {
                 case MessageType.HELLO:
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.HELLO, "Hello"));
+                    break;
 
-                    _logger.LogInformation(envelope.SenderId + "Said Hello");
+                case MessageType.GOOD_BYE:
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.GOOD_BYE, "Bye"));
+                    break;
 
+                case MessageType.MEDIA_STATUS:
+                    MediaContent receivedStatus = JsonSerializer.Deserialize<MediaContent>(envelope.Message);
+                    break;
+
+                case MessageType.MEDIA_STATUS_REQUEST:
+                    MediaContent sentStatus = new MediaContent([2,2], "Mateja", "test.txt", false);
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(sentStatus)));
+                    break;
+
+                case MessageType.MEDIA_CONTENT:
+                    MediaContent receivedMedia = JsonSerializer.Deserialize<MediaContent>(envelope.Message);
+                    break;
+
+                case MessageType.MEDIA_CONTENT_REQUEST:
+                    MediaContent sentMedia = new MediaContent([2, 2], "Mateja", "test.txt", false);
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(sentMedia)));
                     break;
             }
         }
@@ -66,10 +92,10 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void upload_media_Click(object sender, EventArgs e)
+        private void upload_media_Click_1(object sender, EventArgs e)
         {
             // Applied filters
-            file_dialog.Filter = "Images et vidéos (*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV)|*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV|" +
+            file_dialog.Filter = "Images et vid�os (*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV)|*.MP3;*.MP4;*.MOV;*.GIF;*.PNG;*.JPEG;*.JPG;*.WAV|" +
             "All files (*.*)|*.*";
 
             DialogResult dr = file_dialog.ShowDialog();
@@ -92,16 +118,16 @@ namespace matvelickov_bitRuisseau
 
             Media currentMedia = new Media(file_name, file_size, file_ext);
 
-            if (!mediaList.Items.Contains(new System.IO.FileInfo(currentMedia.filename).Name))
+            if (!mediaList.Items.Contains(new System.IO.FileInfo(currentMedia.FileName).Name))
             {
                 error_filename.Visible = false;
                 upload_media.Location = new Point(14, 292);
 
                 listMedia.Add(currentMedia);
-                mediaList.Items.Add(new System.IO.FileInfo(currentMedia.filename).Name);
-                mediaList.SelectedItem = new System.IO.FileInfo(currentMedia.filename).Name;
+                mediaList.Items.Add(new System.IO.FileInfo(currentMedia.FileName).Name);
+                mediaList.SelectedItem = new System.IO.FileInfo(currentMedia.FileName).Name;
             }
-            else 
+            else
             {
                 error_filename.Visible = true;
                 upload_media.Location = new Point(14, 312);
@@ -156,13 +182,13 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void delete_media_Click(object sender, EventArgs e)
+        private void delete_media_Click_1(object sender, EventArgs e)
         {
             if (mediaList.SelectedItem != null)
             {
                 // TODO Check if the file's sizes are identical
                 // TODO Move the original file in the project folder bin/Debug/
-                Media currentMedia = listMedia.Single(cm => cm.filename.Contains(mediaList.SelectedItem.ToString()));
+                Media currentMedia = listMedia.Single(cm => cm.FileName.Contains(mediaList.SelectedItem.ToString()));
 
                 mediaList.Items.Remove(mediaList.SelectedItem);
                 listMedia.Remove(currentMedia);
@@ -178,12 +204,12 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void show_media_Click(object sender, EventArgs e)
+        private void show_media_Click_1(object sender, EventArgs e)
         {
             // TODO Check the id of the uploaded the media (duplicates files)
-            Media currentMedia = listMedia.Single(cm => cm.filename.Contains(mediaList.SelectedItem.ToString()));
+            Media currentMedia = listMedia.Single(cm => cm.FileName.Contains(mediaList.SelectedItem.ToString()));
 
-            string path = $@"{new System.IO.FileInfo(currentMedia.filename)}";
+            string path = $@"{new System.IO.FileInfo(currentMedia.FileName)}";
             string ext = Path.GetExtension(path);
 
             if (imageExt.Contains(ext))
@@ -221,19 +247,11 @@ namespace matvelickov_bitRuisseau
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void mediaList_SelectedIndexChanged(object sender, EventArgs e)
+        private void mediaList_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             delete_media.Visible = mediaList.SelectedItem != null;
             show_media.Visible = mediaList.SelectedItem != null;
             fullscreen_media.Visible = mediaList.SelectedItem != null;
         }
-
-        private void fullscreen_media_Click(object sender, EventArgs e)
-        {
-        }
-        private void showMedia_Click(object sender, EventArgs e)
-        {
-        }
-
     }
 }
