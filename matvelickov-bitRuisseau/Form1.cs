@@ -11,6 +11,7 @@ using Backend;
 using Backend.Protocol;
 using bit_ruisseau.bit_ruisseau;
 using Frontend.Logging;
+using System.Drawing.Imaging;
 using System.Text.Json;
 
 namespace bit_ruisseau
@@ -22,6 +23,7 @@ namespace bit_ruisseau
         private readonly ILogger _logger;
 
         List<Media> listMedia = new List<Media>();
+        List<MediaContent> listMC = new List<MediaContent>();
 
         List<string> listExt = new List<string>() { ".mp3", ".mp4", ".mov", ".gif", ".png", ".jpeg", ".jpg", ".wav" };
 
@@ -53,41 +55,46 @@ namespace bit_ruisseau
         private void OnMessageReceived(Envelope envelope)
         {
             // Ignorer mes propre messages
-            // if (envelope.SenderId == _agent.NodeId) return;
+            if (envelope.SenderId == _agent.NodeId) return;
 
             _logger.LogInformation(envelope.ToString());
 
             switch (envelope.Type)
             {
-                /*case MessageType.HELLO:
+                case MessageType.HELLO:
                     _agent.Send(new Envelope(_agent.NodeId, MessageType.HELLO, "Hello"));
                     break;
 
+                // TODO LWT
                 case MessageType.GOOD_BYE:
                     _agent.Send(new Envelope(_agent.NodeId, MessageType.GOOD_BYE, "Bye"));
-                    break;*/
+                    break;
 
                 case MessageType.MEDIA_STATUS:
-                    
+                    Mediatheque receivedLibrary = JsonSerializer.Deserialize<Mediatheque>(envelope.ToString())!;
                     break;
 
                 case MessageType.MEDIA_STATUS_REQUEST:
-                    Mediatheque sentMediatheque = new Mediatheque("Mateja");
-                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(sentMediatheque)));
+                    // Sending the media library when the request is received
+                    Mediatheque mateja = new Mediatheque("Mateja !");
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(mateja)));
                     break;
 
-                    // 
                 case MessageType.MEDIA_CONTENT:
-                        ///MediaContent recievedMedia = JsonSerializer.Deserialize<MediaContent>(envelope.Message);
-                        // Image convertedImage = ByteArrayToImage(recievedMedia.MediaContentFile);
+                    // Converting the byte array present in the received class into an image
+                    MediaContent receivedMedia = JsonSerializer.Deserialize<MediaContent>(envelope.Message)!;
+                    Image convertedImage = ByteArrayToImage(receivedMedia.MediaContentFile);
 
-                       // showMedia.Invoke(new Action(() => showMedia.Image = convertedImage));
+                    // Storing the received class in a list
+                    listMC.Add(receivedMedia);
+                    media_available.Invoke(new Action(() => media_available.Items.Add($"{receivedMedia.MediathequeName} - {receivedMedia.FileName}")));
                     break;
 
-                    case MessageType.MEDIA_CONTENT_REQUEST:
-                        MediaContent sentMedia = new MediaContent([2, 2], "Mateja", "test.txt", false);
-                        _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(sentMedia)));
-                        break;
+                case MessageType.MEDIA_CONTENT_REQUEST:
+                    // Sending the displayed image, to the broker
+                    MediaContent sentMedia = new MediaContent([2, 2], "Mateja", "test.txt", false);
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(sentMedia)));
+                    break;
             }
         }
 
@@ -283,12 +290,26 @@ namespace bit_ruisseau
             fullscreen_media.Visible = mediaList.SelectedItem != null;
         }
 
+        /// <summary>
+        /// Ask the broker what media are present
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void get_online_Click(object sender, EventArgs e)
         {
-            // MediaContent test = new MediaContent(ImageToByteArray(showMedia.Image), "Mateja", "test.txt", false);
-
             _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS_REQUEST, ""));
-            // _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(test)));
         }
+
+        /// <summary>
+        /// Sending a MediaContent to the broker
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void send_media_Click(object sender, EventArgs e)
+        {
+            MediaContent myMedia = new MediaContent(ImageToByteArray(showMedia.Image), "Mateja", "mateja.png", false);
+            _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(ImageToByteArray(showMedia.Image))));
+        }
+
     }
 }

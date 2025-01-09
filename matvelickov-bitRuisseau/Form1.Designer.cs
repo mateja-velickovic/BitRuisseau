@@ -41,8 +41,10 @@
             upload_media = new Button();
             media_available = new ListBox();
             get_online = new Button();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)wMediaPlayer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)showMedia).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtconsole
@@ -178,12 +180,22 @@
             get_online.UseVisualStyleBackColor = true;
             get_online.Click += get_online_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(951, 222);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(323, 170);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 12;
+            pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(913, 632);
+            ClientSize = new Size(1309, 632);
+            Controls.Add(pictureBox1);
             Controls.Add(get_online);
             Controls.Add(media_available);
             Controls.Add(upload_media);
@@ -199,6 +211,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)wMediaPlayer).EndInit();
             ((System.ComponentModel.ISupportInitialize)showMedia).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -217,5 +230,6 @@
         private Button upload_media;
         private ListBox media_available;
         private Button get_online;
+        private PictureBox pictureBox1;
     }
 }
