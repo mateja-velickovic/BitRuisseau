@@ -53,37 +53,41 @@ namespace bit_ruisseau
         private void OnMessageReceived(Envelope envelope)
         {
             // Ignorer mes propre messages
-            if (envelope.SenderId == _agent.NodeId) return;
+            // if (envelope.SenderId == _agent.NodeId) return;
 
             _logger.LogInformation(envelope.ToString());
 
             switch (envelope.Type)
             {
-                case MessageType.HELLO:
+                /*case MessageType.HELLO:
                     _agent.Send(new Envelope(_agent.NodeId, MessageType.HELLO, "Hello"));
                     break;
 
                 case MessageType.GOOD_BYE:
                     _agent.Send(new Envelope(_agent.NodeId, MessageType.GOOD_BYE, "Bye"));
-                    break;
+                    break;*/
 
                 case MessageType.MEDIA_STATUS:
-                    MediaContent receivedStatus = JsonSerializer.Deserialize<MediaContent>(envelope.Message);
+                    
                     break;
 
                 case MessageType.MEDIA_STATUS_REQUEST:
-                    MediaContent sentStatus = new MediaContent([2,2], "Mateja", "test.txt", false);
-                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(sentStatus)));
+                    Mediatheque sentMediatheque = new Mediatheque("Mateja");
+                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(sentMediatheque)));
                     break;
 
+                    // 
                 case MessageType.MEDIA_CONTENT:
-                    MediaContent receivedMedia = JsonSerializer.Deserialize<MediaContent>(envelope.Message);
+                        ///MediaContent recievedMedia = JsonSerializer.Deserialize<MediaContent>(envelope.Message);
+                        // Image convertedImage = ByteArrayToImage(recievedMedia.MediaContentFile);
+
+                       // showMedia.Invoke(new Action(() => showMedia.Image = convertedImage));
                     break;
 
-                case MessageType.MEDIA_CONTENT_REQUEST:
-                    MediaContent sentMedia = new MediaContent([2, 2], "Mateja", "test.txt", false);
-                    _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(sentMedia)));
-                    break;
+                    case MessageType.MEDIA_CONTENT_REQUEST:
+                        MediaContent sentMedia = new MediaContent([2, 2], "Mateja", "test.txt", false);
+                        _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(sentMedia)));
+                        break;
             }
         }
 
@@ -135,6 +139,31 @@ namespace bit_ruisseau
 
             // TODO Select the uploaded file on upload
             // TODO Display horizontaly the items
+        }
+
+        /// <summary>
+        /// Convert an image to a byte's array
+        /// </summary>
+        /// <param name="imageToByte"></param>
+        /// <returns></returns>
+        public static byte[] ImageToByteArray(Image imageToByte)
+        {
+            ImageConverter _imageConverter = new ImageConverter();
+            byte[] bytes = (byte[])_imageConverter.ConvertTo(imageToByte, typeof(byte[]));
+            return bytes;
+        }
+
+        /// <summary>
+        /// Convert a byte's array to image
+        /// </summary>
+        /// <param name="byteArrayIn"></param>
+        /// <returns></returns>
+        public Image ByteArrayToImage(byte[] bytes)
+        {
+            MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length);
+            ms.Write(bytes, 0, bytes.Length);
+            Image imageBack = Image.FromStream(ms, true);
+            return imageBack;
         }
 
         /// <summary>
@@ -252,6 +281,14 @@ namespace bit_ruisseau
             delete_media.Visible = mediaList.SelectedItem != null;
             show_media.Visible = mediaList.SelectedItem != null;
             fullscreen_media.Visible = mediaList.SelectedItem != null;
+        }
+
+        private void get_online_Click(object sender, EventArgs e)
+        {
+            // MediaContent test = new MediaContent(ImageToByteArray(showMedia.Image), "Mateja", "test.txt", false);
+
+            _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS_REQUEST, ""));
+            // _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_STATUS, JsonSerializer.Serialize(test)));
         }
     }
 }

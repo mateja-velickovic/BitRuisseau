@@ -39,6 +39,8 @@
             showMedia = new PictureBox();
             fullscreen_media = new Button();
             upload_media = new Button();
+            media_available = new ListBox();
+            get_online = new Button();
             ((System.ComponentModel.ISupportInitialize)wMediaPlayer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)showMedia).BeginInit();
             SuspendLayout();
@@ -155,12 +157,35 @@
             upload_media.UseVisualStyleBackColor = false;
             upload_media.Click += upload_media_Click_1;
             // 
+            // media_available
+            // 
+            media_available.Font = new Font("Segoe UI", 14F);
+            media_available.FormattingEnabled = true;
+            media_available.ItemHeight = 25;
+            media_available.Location = new Point(494, 343);
+            media_available.Name = "media_available";
+            media_available.ScrollAlwaysVisible = true;
+            media_available.Size = new Size(407, 204);
+            media_available.TabIndex = 10;
+            // 
+            // get_online
+            // 
+            get_online.Location = new Point(735, 578);
+            get_online.Name = "get_online";
+            get_online.Size = new Size(166, 49);
+            get_online.TabIndex = 11;
+            get_online.Text = "Demander les appreils disponibles";
+            get_online.UseVisualStyleBackColor = true;
+            get_online.Click += get_online_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(913, 632);
+            Controls.Add(get_online);
+            Controls.Add(media_available);
             Controls.Add(upload_media);
             Controls.Add(fullscreen_media);
             Controls.Add(showMedia);
@@ -190,5 +215,7 @@
         private PictureBox showMedia;
         private Button fullscreen_media;
         private Button upload_media;
+        private ListBox media_available;
+        private Button get_online;
     }
 }
