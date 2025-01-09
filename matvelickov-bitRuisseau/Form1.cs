@@ -158,7 +158,7 @@ namespace bit_ruisseau
         public static byte[] ImageToByteArray(Image imageToByte)
         {
             ImageConverter _imageConverter = new ImageConverter();
-            byte[] bytes = (byte[])_imageConverter.ConvertTo(imageToByte, typeof(byte[]));
+            byte[] bytes = (byte[])_imageConverter.ConvertTo(imageToByte, typeof(byte[]))!;
             return bytes;
         }
 
