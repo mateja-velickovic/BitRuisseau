@@ -41,10 +41,9 @@
             upload_media = new Button();
             media_available = new ListBox();
             get_online = new Button();
-            pictureBox1 = new PictureBox();
+            send_media = new Button();
             ((System.ComponentModel.ISupportInitialize)wMediaPlayer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)showMedia).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtconsole
@@ -180,22 +179,23 @@
             get_online.UseVisualStyleBackColor = true;
             get_online.Click += get_online_Click;
             // 
-            // pictureBox1
+            // send_media
             // 
-            pictureBox1.Location = new Point(951, 222);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(323, 170);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 12;
-            pictureBox1.TabStop = false;
+            send_media.Location = new Point(494, 578);
+            send_media.Name = "send_media";
+            send_media.Size = new Size(166, 49);
+            send_media.TabIndex = 12;
+            send_media.Text = "Envoyer le media qui est affiché";
+            send_media.UseVisualStyleBackColor = true;
+            send_media.Click += send_media_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(1309, 632);
-            Controls.Add(pictureBox1);
+            ClientSize = new Size(917, 632);
+            Controls.Add(send_media);
             Controls.Add(get_online);
             Controls.Add(media_available);
             Controls.Add(upload_media);
@@ -211,7 +211,6 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)wMediaPlayer).EndInit();
             ((System.ComponentModel.ISupportInitialize)showMedia).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -230,6 +229,6 @@
         private Button upload_media;
         private ListBox media_available;
         private Button get_online;
-        private PictureBox pictureBox1;
+        private Button send_media;
     }
 }

@@ -22,7 +22,9 @@ namespace bit_ruisseau
         private Agent _agent;
         private readonly ILogger _logger;
 
+        // List for local media
         List<Media> listMedia = new List<Media>();
+        // List for all received MediaContent
         List<MediaContent> listMC = new List<MediaContent>();
 
         List<string> listExt = new List<string>() { ".mp3", ".mp4", ".mov", ".gif", ".png", ".jpeg", ".jpg", ".wav" };
@@ -310,6 +312,5 @@ namespace bit_ruisseau
             MediaContent myMedia = new MediaContent(ImageToByteArray(showMedia.Image), "Mateja", "mateja.png", false);
             _agent.Send(new Envelope(_agent.NodeId, MessageType.MEDIA_CONTENT, JsonSerializer.Serialize(ImageToByteArray(showMedia.Image))));
         }
-
     }
 }
