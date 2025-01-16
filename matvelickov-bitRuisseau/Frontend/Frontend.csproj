@@ -8,6 +8,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <StartupObject>Frontend.Program</StartupObject>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     </PropertyGroup>
 
     <ItemGroup>
